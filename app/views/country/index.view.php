@@ -35,6 +35,26 @@
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#countryForm">Aggiungi un nuovo paese</button>
 
+<?php require(__DIR__ . '/../partials/modal-country-form.php'); ?>
+<script>
+  $(document).ready(function() {
+    const modal = $('#countryForm');
+    const form = modal.find('form');
+
+    $('.fa-edit').click(function(e){
+      const countryId = $(this).data('country-id');
+      const countryName = $(this).closest('tr').find('td:nth-child(2)').text();
+
+      form.find('input[name="action"]').val('edit');
+      form.find('input[name="countryId"]').val(countryId);
+      form.find('input[name="countryName"]').val(countryName);
+    });
+
+    modal.on('hidden.bs.modal', function() {
+      form.find('input[name="countryName"]').val('');
+    });
+  });
+</script>
 
 <?php require(__DIR__ . '/../partials/footer-scripts.php'); ?>
 

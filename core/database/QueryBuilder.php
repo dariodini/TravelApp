@@ -37,11 +37,38 @@ class QueryBuilder
         }
     }
 
+
+    public function update($table, $parameters): void
+    {
+        $columns = [];
+        $id = $parameters['id'];
+
+        foreach ($parameters as $key => $value) {
+            if ($key !== 'id') {
+                $columns[] = $key . ' = :' . $key;
+            }
+        }
+
         $sql = sprintf(
-            'insert into %s (%s) values (%s)',
+            'UPDATE %s SET %s WHERE id = :id',
             $table,
-            implode(', ', array_keys($parameters)),
-            ':' . implode(', :', array_keys($parameters))
+            implode(', ', $columns)
+        );
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(':id', $id);
+            unset($parameters['id']);
+
+            foreach ($parameters as $key => $value) {
+                $statement->bindValue(':' . $key, $value);
+            }
+
+            $statement->execute();
+        } catch (\Exception $e) {
+            echo "An error occurred while executing the query. Try later.";
+        }
+    }
         );
 
         try {

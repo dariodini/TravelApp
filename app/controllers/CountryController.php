@@ -12,4 +12,19 @@ class CountryController
     return view('country/index', ['countries'=>$countries]);
   }
 
+  public function create()
+  {
+    $action = $_POST['action'] ?? '';
+
+    switch ($action){
+      case 'edit':
+        Country::update();
+        break;
+      default:
+        Country::create();
+    }
+
+    return redirect('country');
+  }
 }
+

@@ -29,4 +29,13 @@ class Country
         return App::get('database')->selectAll('countries');
     }
 
+    public static function create()
+    {
+        return App::get('database')->create('countries', ['name' => $_POST['countryName']]);
+    }
+
+    public static function update()
+    {
+        return App::get('database')->update('countries', ['name' => $_POST['countryName'], 'id' => $_POST['countryId']]);
+    }
 }
