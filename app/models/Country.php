@@ -38,4 +38,9 @@ class Country
     {
         return App::get('database')->update('countries', ['name' => $_POST['countryName'], 'id' => $_POST['countryId']]);
     }
+
+    public static function delete()
+    {
+        return App::get('database')->delete('countries', ['id' => $_POST['countryId']]);
+    }
 }

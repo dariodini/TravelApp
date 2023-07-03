@@ -69,11 +69,20 @@ class QueryBuilder
             echo "An error occurred while executing the query. Try later.";
         }
     }
+
+    public function delete($table, $parameters): void
+    {
+        $id = $parameters['id'];
+
+        $sql = sprintf(
+            'DELETE FROM %s WHERE id = :id',
+            $table
         );
 
         try {
             $statement = $this->pdo->prepare($sql);
-            $statement->execute($parameters);
+            $statement->bindValue(':id', $id);
+            $statement->execute();
         } catch (\Exception $e) {
             echo "An error occurred while executing the query. Try later.";
         }

@@ -36,10 +36,16 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#countryForm">Aggiungi un nuovo paese</button>
 
 <?php require(__DIR__ . '/../partials/modal-country-form.php'); ?>
+<?php require(__DIR__ . '/../partials/modal-country-delete.php'); ?>
+
+
 <script>
   $(document).ready(function() {
     const modal = $('#countryForm');
     const form = modal.find('form');
+
+    const deleteModal = $('#countryDelete');
+    const deleteForm = deleteModal.find('form');
 
     $('.fa-edit').click(function(e){
       const countryId = $(this).data('country-id');
@@ -49,6 +55,15 @@
       form.find('input[name="countryId"]').val(countryId);
       form.find('input[name="countryName"]').val(countryName);
     });
+
+    $('.fa-trash').click(function(e){
+      const countryId = $(this).data('country-id');
+      const countryName = $(this).closest('tr').find('td:nth-child(2)').text();
+
+      deleteForm.find('input[name="action"]').val('delete');
+      deleteForm.find('input[name="countryId"]').val(countryId);
+      $('#countryName').text(countryName);
+    })
 
     modal.on('hidden.bs.modal', function() {
       form.find('input[name="countryName"]').val('');

@@ -20,6 +20,8 @@ class CountryController
       case 'edit':
         Country::update();
         break;
+      case 'delete':
+        Country::delete();
       default:
         Country::create();
     }
