@@ -12,7 +12,7 @@ class CountryController
     return view('country/index', ['countries'=>$countries]);
   }
 
-  public function create()
+  public function handleRequest()
   {
     $action = $_POST['action'] ?? '';
 

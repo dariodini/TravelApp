@@ -20,7 +20,7 @@ class TripController
     return view('trip/index', ['trips'=>$trips, 'selectedCountryName' => $countryName, 'selectedAvailableSeats' => $availableSeats]);
   }
 
-  public function create()
+  public function handleRequest()
   {
     $action = $_POST['action'] ?? '';
 
