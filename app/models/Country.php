@@ -14,9 +14,9 @@ class Country
         return $this->id;
     }
 
-    public function getName()
+    public static function getName($id)
     {
-        return $this->name;
+        return App::get('database')->getCountryNameFromId($id);
     }
 
     public function setName($name): void

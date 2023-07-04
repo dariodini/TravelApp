@@ -87,4 +87,13 @@ class QueryBuilder
             echo "An error occurred while executing the query. Try later.";
         }
     }
+
+    public function getCountryNameFromId($id)
+    {
+        $statement = $this->pdo->prepare("SELECT name FROM countries WHERE id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
 }
