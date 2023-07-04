@@ -27,7 +27,7 @@
             </a>
           </td>
           <td>
-            <a href="" data-bs-toggle="modal" data-bs-target="#countryDelete">
+            <a href="" data-bs-toggle="modal" data-bs-target="#tripDelete">
               <i class="fa fa-trash" aria-hidden="true" data-trip-id="<?php echo $trip->id; ?>"></i>
             </a>
           </td>
@@ -40,12 +40,16 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tripForm">Aggiungi un nuovo viaggio</button>
 
 <?php require(__DIR__ . '/../partials/modal-trip-form.php'); ?>
+<?php require(__DIR__ . '/../partials/modal-trip-delete.php'); ?>
 
 
 <script>
   $(document).ready(function() {
     const modal = $('#tripForm');
     const form = modal.find('form');
+
+    const deleteModal = $('#tripDelete');
+    const deleteForm = deleteModal.find('form');
 
     $('.fa-edit').click(function(e){
       const tripId = $(this).data('trip-id');
@@ -57,6 +61,17 @@
       form.find(`option:contains(${countrySelected})`).attr("selected", "selected");
       form.find('input[name="tripSeats"]').val(availableSeats);
     });
+
+    $('.fa-trash').click(function(e){
+      const tripId = $(this).data('trip-id');
+      const countrySelected = $(this).closest('tr').find('td:nth-child(2)').text();
+      const availableSeats = $(this).closest('tr').find('td:nth-child(3)').text();
+
+      deleteForm.find('input[name="action"]').val('delete');
+      deleteForm.find('input[name="tripId"]').val(tripId);
+      $('#countryName').text(countrySelected);
+      $('#availableSeats').text(availableSeats);
+    })
 
     modal.on('hidden.bs.modal', function() {
       form.find('input[name="tripCountry"]').val('');

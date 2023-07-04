@@ -20,4 +20,9 @@ class Trip
     {
         return App::get('database')->update('trips', ['country_id' => $_POST['tripCountry'], 'available_seats' => $_POST['tripSeats'], 'id' => $_POST['tripId']]);
     }
+
+    public static function delete()
+    {
+        return App::get('database')->delete('trips', ['id' => $_POST['tripId']]);
+    }
 }

@@ -74,6 +74,7 @@ class QueryBuilder
     {
         $id = $parameters['id'];
 
+
         $sql = sprintf(
             'DELETE FROM %s WHERE id = :id',
             $table

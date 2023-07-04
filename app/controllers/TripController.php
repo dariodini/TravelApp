@@ -20,6 +20,9 @@ class TripController
       case 'edit':
         Trip::update();
         break;
+      case 'delete':
+        Trip::delete();
+        break;
       default:
         Trip::create();
     }
