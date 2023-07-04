@@ -6,22 +6,9 @@ use App\Core\App;
 
 class Country
 {
-    private $id;
-    private $name;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
     public static function getName($id)
     {
         return App::get('database')->getCountryNameFromId($id);
-    }
-
-    public function setName($name): void
-    {
-        $this->name = $name;
     }
 
     public static function selectAll()
