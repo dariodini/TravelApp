@@ -4,6 +4,24 @@
 
 <?php use App\Entities\Country; ?>
 
+<h3>Filtri</h3>
+<form action="/trip" method="GET" id="filterForm" class="mb-3">
+  <div class="row gx-2">
+    <div class="col-4">
+      <input type="text" class="form-control" name="countryName" placeholder="Nome del paese" value="<?= isset($selectedCountryName) ? htmlspecialchars($selectedCountryName) : '' ?>">
+    </div>
+    <div class="col-4">
+      <input type="number" class="form-control" name="availableSeats" placeholder="Numero posti disponibili" value="<?= isset($selectedAvailableSeats) ? htmlspecialchars($selectedAvailableSeats) : '' ?>">
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-primary w-100">Filtra</button>
+    </div>
+    <div class="col-2">
+      <button type="reset" class="btn btn-danger w-100">Azzera</button>
+    </div>
+  </div>
+</form>
+
 <?php if(count($trips)>0) { ?>
   <table class="table table-striped table-hover border">
     <thead>
@@ -35,6 +53,8 @@
       <?php endforeach; ?>
     </tbody>
   </table>
+<?php } else{ ?>
+  <div class="alert bg-warning">Non è presente alcun risultato</div>
 <?php } ?>
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tripForm">Aggiungi un nuovo viaggio</button>
@@ -50,6 +70,8 @@
 
     const deleteModal = $('#tripDelete');
     const deleteForm = deleteModal.find('form');
+
+    const filterForm = $('#filterForm');
 
     $('.fa-edit').click(function(e){
       const tripId = $(this).data('trip-id');
@@ -78,6 +100,10 @@
       form.find('option[selected="selected"]').removeAttr('selected');
       form.find('input[name="tripSeats"]').val('');
     });
+
+    filterForm.on('reset', function(){
+      document.location.href = '/trip'
+    })
   });
 </script>
 <?php require(__DIR__ . '/../partials/footer-scripts.php'); ?>

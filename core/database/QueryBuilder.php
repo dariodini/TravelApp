@@ -97,4 +97,33 @@ class QueryBuilder
 
         return $statement->fetchColumn();
     }
+
+    public function filter($countryName, $availableSeats)
+    {
+        $query = "SELECT * FROM trips WHERE 1";
+
+        if (!empty($countryName)) {
+            $query .= " AND country_id IN (SELECT id FROM countries WHERE name LIKE :countryName)";
+        }
+        if (!empty($availableSeats)) {
+            $query .= " AND available_seats = :availableSeats";
+        }
+
+        try {
+            $statement = $this->pdo->prepare($query);
+
+            if (!empty($countryName)) {
+                $statement->bindValue(':countryName', "%$countryName%");
+            }
+            if (!empty($availableSeats)) {
+                $statement->bindValue(':availableSeats', $availableSeats);
+            }
+
+            $statement->execute();
+
+            return $statement->fetchAll(PDO::FETCH_CLASS);
+        } catch (\Exception $e) {
+            echo "An error occurred while executing the query. Try later.";
+        }
+    }
 }

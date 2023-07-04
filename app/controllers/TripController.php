@@ -8,8 +8,16 @@ class TripController
 {
   public function homepage()
   {
-    $trips = Trip::selectAll();
-    return view('trip/index', ['trips'=>$trips]);
+    $countryName = $_GET['countryName'] ?? '';
+    $availableSeats = $_GET['availableSeats'] ?? '';
+
+    if (!empty($countryName) || !empty($availableSeats)) {
+        $trips = Trip::filter($countryName, $availableSeats);
+    } else {
+        $trips = Trip::selectAll();
+    }
+
+    return view('trip/index', ['trips'=>$trips, 'selectedCountryName' => $countryName, 'selectedAvailableSeats' => $availableSeats]);
   }
 
   public function create()

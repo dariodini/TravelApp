@@ -31,6 +31,8 @@
       <?php endforeach; ?>
     </tbody>
   </table>
+<?php } else{ ?>
+  <div class="alert bg-warning">Non è presente alcun risultato</div>
 <?php } ?>
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#countryForm">Aggiungi un nuovo paese</button>

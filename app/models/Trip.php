@@ -25,4 +25,9 @@ class Trip
     {
         return App::get('database')->delete('trips', ['id' => $_POST['tripId']]);
     }
+
+    public static function filter()
+    {
+        return App::get('database')->filter($_GET['countryName'], $_GET['availableSeats']);
+    }
 }
