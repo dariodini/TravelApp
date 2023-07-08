@@ -30,4 +30,16 @@ class Country
     {
         return App::get('database')->delete('countries', ['id' => $id]);
     }
+
+    public static function exists($id)
+    {
+        $countries = self::selectAll();
+
+        foreach ($countries as $country) {
+            if ($country->id == $id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
