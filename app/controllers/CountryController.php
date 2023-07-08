@@ -15,15 +15,17 @@ class CountryController
   public function handleRequest()
   {
     $action = $_POST['action'] ?? '';
+    $countryName = $_POST['countryName'];
+    $countryId = $_POST['countryId'];
 
     switch ($action){
       case 'edit':
-        Country::update($_POST['countryName'], $_POST['countryId']);
+        Country::update($countryName, $countryId);
         break;
       case 'delete':
-        Country::delete($_POST['countryId']);
+        Country::delete($countryId);
       default:
-        Country::create($_POST['countryName']);
+        Country::create($countryName);
     }
 
     return redirect('country');
