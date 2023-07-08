@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controllers\\ApiCountryController' => $baseDir . '/app/controllers/ApiCountryController.php',
     'App\\Controllers\\CountryController' => $baseDir . '/app/controllers/CountryController.php',
     'App\\Controllers\\PagesController' => $baseDir . '/app/controllers/PagesController.php',
     'App\\Controllers\\TripController' => $baseDir . '/app/controllers/TripController.php',
@@ -16,6 +17,7 @@ return array(
     'App\\Core\\Router' => $baseDir . '/core/Router.php',
     'App\\Entities\\Country' => $baseDir . '/app/models/Country.php',
     'App\\Entities\\Trip' => $baseDir . '/app/models/Trip.php',
+    'App\\core\\Response' => $baseDir . '/core/Response.php',
     'ComposerAutoloaderInitdd785d45566289037fce5c86d60d409f' => $vendorDir . '/composer/autoload_real.php',
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
     'Composer\\Autoload\\ComposerStaticInitdd785d45566289037fce5c86d60d409f' => $vendorDir . '/composer/autoload_static.php',
