@@ -18,12 +18,12 @@ class CountryController
 
     switch ($action){
       case 'edit':
-        Country::update();
+        Country::update($_POST['countryName'], $_POST['countryId']);
         break;
       case 'delete':
-        Country::delete();
+        Country::delete($_POST['countryId']);
       default:
-        Country::create();
+        Country::create($_POST['countryName']);
     }
 
     return redirect('country');

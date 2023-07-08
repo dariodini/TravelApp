@@ -16,18 +16,18 @@ class Country
         return App::get('database')->selectAll('countries');
     }
 
-    public static function create()
+    public static function create($name)
     {
-        return App::get('database')->create('countries', ['name' => $_POST['countryName']]);
+        return App::get('database')->create('countries', ['name' => $name]);
     }
 
-    public static function update()
+    public static function update($name, $id)
     {
-        return App::get('database')->update('countries', ['name' => $_POST['countryName'], 'id' => $_POST['countryId']]);
+        return App::get('database')->update('countries', ['name' => $name, 'id' => $id]);
     }
 
-    public static function delete()
+    public static function delete($id)
     {
-        return App::get('database')->delete('countries', ['id' => $_POST['countryId']]);
+        return App::get('database')->delete('countries', ['id' => $id]);
     }
 }
