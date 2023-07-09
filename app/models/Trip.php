@@ -11,23 +11,35 @@ class Trip
         return App::get('database')->selectAll('trips');
     }
 
-    public static function create()
+    public static function create($tripCountryId, $tripSeats)
     {
-        return App::get('database')->create('trips', ['country_id' => $_POST['tripCountry'], 'available_seats' => $_POST['tripSeats']]);
+        return App::get('database')->create('trips', ['country_id' => $tripCountryId, 'available_seats' => $tripSeats]);
     }
 
-    public static function update()
+    public static function update($tripCountryId, $tripSeats, $tripId)
     {
-        return App::get('database')->update('trips', ['country_id' => $_POST['tripCountry'], 'available_seats' => $_POST['tripSeats'], 'id' => $_POST['tripId']]);
+        return App::get('database')->update('trips', ['country_id' => $tripCountryId, 'available_seats' => $tripSeats, 'id' => $tripId]);
     }
 
-    public static function delete()
+    public static function delete($tripId)
     {
-        return App::get('database')->delete('trips', ['id' => $_POST['tripId']]);
+        return App::get('database')->delete('trips', ['id' => $tripId]);
     }
 
-    public static function filter()
+    public static function filter($countryName, $availableSeats)
     {
-        return App::get('database')->filter($_GET['countryName'], $_GET['availableSeats']);
+        return App::get('database')->filter($countryName, $availableSeats);
+    }
+
+    public static function exists($id)
+    {
+        $trips = self::selectAll();
+
+        foreach ($trips as $trip) {
+            if ($trip->id == $id) {
+                return true;
+            }
+        }
+        return false;
     }
 }

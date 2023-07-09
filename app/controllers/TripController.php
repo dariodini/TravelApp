@@ -12,7 +12,7 @@ class TripController
     $availableSeats = $_GET['availableSeats'] ?? '';
 
     if (!empty($countryName) || !empty($availableSeats)) {
-        $trips = Trip::filter($countryName, $availableSeats);
+        $trips = Trip::filter($_GET['countryName'], $_GET['availableSeats']);
     } else {
         $trips = Trip::selectAll();
     }
@@ -26,13 +26,13 @@ class TripController
 
     switch ($action){
       case 'edit':
-        Trip::update();
+        Trip::update($_POST['tripCountry'], $_POST['tripSeats'], $_POST['tripId']);
         break;
       case 'delete':
-        Trip::delete();
+        Trip::delete($_POST['tripId']);
         break;
       default:
-        Trip::create();
+        Trip::create($_POST['tripCountry'], $_POST['tripSeats']);
     }
 
     return redirect('trip');
