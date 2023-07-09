@@ -126,4 +126,13 @@ class QueryBuilder
             echo "An error occurred while executing the query. Try later.";
         }
     }
+
+    public function selectById($table, $id)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_OBJ);
+    }
 }

@@ -42,4 +42,10 @@ class Trip
         }
         return false;
     }
+
+    public static function selectById($id)
+    {
+        $trip = App::get('database')->selectById('trips', $id);
+        return $trip;
+    }
 }
