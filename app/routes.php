@@ -12,3 +12,8 @@ $router->get('api/countries', 'ApiCountryController@getAllCountries');
 $router->post('api/countries', 'ApiCountryController@addNewCountry');
 $router->put('api/countries', 'ApiCountryController@updateCountry');
 $router->delete("api/countries", 'ApiCountryController@deleteCountry');
+
+$router->get('api/trips', 'ApiTripController@getTrips');
+$router->post('api/trips', 'ApiTripController@addNewTrip');
+$router->put('api/trips', 'ApiTripController@updateTrip');
+$router->delete("api/trips", 'ApiTripController@deleteTrip');

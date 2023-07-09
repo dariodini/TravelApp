@@ -12,6 +12,7 @@ class ComposerStaticInitdd785d45566289037fce5c86d60d409f
 
     public static $classMap = array (
         'App\\Controllers\\ApiCountryController' => __DIR__ . '/../..' . '/app/controllers/ApiCountryController.php',
+        'App\\Controllers\\ApiTripController' => __DIR__ . '/../..' . '/app/controllers/ApiTripController.php',
         'App\\Controllers\\CountryController' => __DIR__ . '/../..' . '/app/controllers/CountryController.php',
         'App\\Controllers\\PagesController' => __DIR__ . '/../..' . '/app/controllers/PagesController.php',
         'App\\Controllers\\TripController' => __DIR__ . '/../..' . '/app/controllers/TripController.php',
