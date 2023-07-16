@@ -1,0 +1,10 @@
+.container-centered{
+  // height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: $border-radius;
+  padding: $spacer;
+  background-color: lightgrey;
+}
