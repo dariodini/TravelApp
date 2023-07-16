@@ -1,11 +1,8 @@
 <?php require(__DIR__ . '/../partials/head.php'); ?>
 
-<h2>Lista viaggi</h2>
-
 <?php use App\Entities\Country; ?>
 
-<h3>Filtri</h3>
-<form action="/trip" method="GET" id="filterForm" class="mb-3">
+<form action="/trip" method="GET" id="filterForm" class="w-100 mb-3">
   <div class="row gx-2">
     <div class="col-4">
       <input type="text" class="form-control" name="countryName" placeholder="Nome del paese" value="<?= isset($selectedCountryName) ? htmlspecialchars($selectedCountryName) : '' ?>">
@@ -54,7 +51,7 @@
     </tbody>
   </table>
 <?php } else{ ?>
-  <div class="alert bg-warning">Non è presente alcun risultato</div>
+  <div class="alert bg-warning w-100">Non è presente alcun risultato</div>
 <?php } ?>
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tripForm">Aggiungi un nuovo viaggio</button>

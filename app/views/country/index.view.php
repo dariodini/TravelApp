@@ -1,7 +1,5 @@
 <?php require(__DIR__ . '/../partials/head.php'); ?>
 
-<h2>Lista paesi</h2>
-
 <?php if(count($countries)>0) { ?>
   <table class="table table-striped table-hover border">
     <thead>
@@ -32,7 +30,7 @@
     </tbody>
   </table>
 <?php } else{ ?>
-  <div class="alert bg-warning">Non è presente alcun risultato</div>
+  <div class="alert bg-warning w-100">Non è presente alcun risultato</div>
 <?php } ?>
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#countryForm">Aggiungi un nuovo paese</button>
