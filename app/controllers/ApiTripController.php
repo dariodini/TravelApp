@@ -13,10 +13,12 @@ class ApiTripController
     $availableSeats = $_GET['availableSeats'] ?? null;
     $countryName = null;
 
-    if(Country::exists($countryId)) {
-      $countryName = Country::getName($countryId);
-    }else {
-      Response::json('Enter a valid Country ID to filter the results', 404);
+    if ($countryId){
+      if(Country::exists($countryId)) {
+        $countryName = Country::getName($countryId);
+      }else {
+        Response::json('Enter a valid Country ID to filter the results', 404);
+      }
     }
 
     if ($countryName || $availableSeats) {
@@ -37,12 +39,12 @@ class ApiTripController
   public function addNewTrip()
   {
     $countryId = $_REQUEST['countryId'];
-    $tripSeats = $_REQUEST['tripSeats'];
+    $availableSeats = $_REQUEST['availableSeats'];
     $countryName = Country::getName($countryId);
 
-    if(!empty($countryId) && !empty($tripSeats) && Country::exists($countryId)){
-      Trip::create($countryId, $tripSeats);
-      Response::json("Trip to {$countryName} with {$tripSeats} seats successfully created", 201);
+    if(!empty($countryId) && !empty($availableSeats) && Country::exists($countryId)){
+      Trip::create($countryId, $availableSeats);
+      Response::json("Trip to {$countryName} with {$availableSeats} seats successfully created", 201);
     } else{
       Response::json("Insert a valid countryId and seats", 400);
     }
@@ -52,20 +54,20 @@ class ApiTripController
   {
     $id = $_REQUEST['id'] ?? null;
     $countryId = $_REQUEST['countryId'] ?? null;
-    $tripSeats = $_REQUEST['tripSeats'] ?? null;
-
-    if(!Country::exists($countryId)) {
-      Response::json('Enter a valid Country ID', 404);
-    }
+    $availableSeats = $_REQUEST['availableSeats'] ?? null;
 
     if(Trip::exists($id)) {
       $trip = Trip::selectById($id);
 
+      if($countryId && !Country::exists($countryId)) {
+        Response::json('Enter a valid Country ID', 404);
+      }
+
       if ($countryId !== null) {
         $trip->country_id = (int)$countryId;
       }
-      if ($tripSeats !== null) {
-        $trip->available_seats = $tripSeats;
+      if ($availableSeats !== null) {
+        $trip->available_seats = $availableSeats;
       }
 
       Trip::update($trip->country_id, $trip->available_seats, $trip->id);
